@@ -19,5 +19,6 @@ const Task = require('./tasks')
 // Task.belongsTo(User)
 
 module.exports = {
-  User
+  User,
+  Task
 }

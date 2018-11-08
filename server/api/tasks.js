@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Task} = require('../db/models')
+const Task = require('../db/models/tasks')
 const {isLoggedIn, isAdmin} = require('./authentication-middleware')
 module.exports = router
 

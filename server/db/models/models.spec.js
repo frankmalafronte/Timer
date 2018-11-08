@@ -4,11 +4,10 @@ const db = require('../index')
 const User = require('./user')
 
 const testItem = {
-  timeElapsed: '100',
+  timeElapsed: 100,
   description: 'this is a test task',
   name: 'name of the task',
-  category: 'client 1',
-  userId: '1'
+  category: 'client 1'
 }
 
 const testUser = {
