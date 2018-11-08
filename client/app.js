@@ -7,7 +7,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>Stopwatch</h1>
+        <div>
+          <Navbar />
+        </div>
+        <h3>start timer</h3>
         <Stopwatch />
       </div>
     )

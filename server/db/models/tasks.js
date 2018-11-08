@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Task = db.define('task', {
+const Task = db.define('tasks', {
   timeElapsed: {
     type: Sequelize.INTEGER,
     allowNull: false
@@ -17,3 +17,9 @@ const Task = db.define('task', {
     type: Sequelize.STRING
   }
 })
+
+Task.hook('beforeValidate', tasks => {
+  tasks.name = tasks.name.charAt(0).toUpperCase() + tasks.name.slice(1)
+})
+
+module.exports = Task
