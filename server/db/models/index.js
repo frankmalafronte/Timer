@@ -15,8 +15,8 @@ const Task = require('./tasks')
  * instead of: const User = require('../db/models/user')
  */
 
-User.hasMany(Task)
-Task.belongsTo(User)
+// User.hasMany(Task)
+// Task.belongsTo(User)
 
 module.exports = {
   User
