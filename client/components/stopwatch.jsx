@@ -28,6 +28,7 @@ export default class Stopwatch extends Component {
   //       clearInterval(this.timer);
   //     }
 
+  //test
   render() {
     const {status, runningTime} = this.state
     return (
