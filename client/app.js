@@ -1,7 +1,7 @@
 import React from 'react'
 import {Navbar} from './components'
 import Routes from './routes'
-import Stopwatch from './components/stopwatch'
+import Stopwatch from './components/Stopwatch'
 
 class App extends React.Component {
   render() {

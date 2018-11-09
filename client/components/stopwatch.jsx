@@ -1,11 +1,17 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import TimerOn from './TimerOn'
+import InputData from './InputData'
 
-export default class Stopwatch extends Component {
-  state = {
-    status: false,
-    runningTime: 0
+class Stopwatch extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      status: false,
+      runningTime: 0
+    }
   }
-
   handleClick = () => {
     this.setState(state => {
       if (state.status) {
@@ -28,15 +34,29 @@ export default class Stopwatch extends Component {
   //       clearInterval(this.timer);
   //     }
 
-  ///testtttt
   render() {
-    const {status, runningTime} = this.state
     return (
       <div>
-        <p>{runningTime}ms</p>
-        <button onClick={this.handleClick}>{status ? 'Stop' : 'Start'}</button>
+        <p>0ms</p>
+        {this.state.status ? (
+          <TimerOn runningtime={this.state.runningTime} />
+        ) : (
+          <button onClick={this.handleClick}>start</button>
+        )}
+
+        <InputData runningTime={this.state.runningTime} />
+
         <button onClick={this.handleReset}>Reset</button>
       </div>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    status: state.status,
+    runningTimer: state.runningTime
+  }
+}
+
+export default connect(mapStateToProps)(Stopwatch)
