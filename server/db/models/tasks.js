@@ -3,15 +3,13 @@ const db = require('../db')
 
 const Task = db.define('tasks', {
   timeElapsed: {
-    type: Sequelize.INTEGER,
-    allowNull: false
+    type: Sequelize.INTEGER
   },
   description: {
     type: Sequelize.STRING
   },
   name: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   category: {
     type: Sequelize.STRING

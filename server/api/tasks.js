@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const Task = require('../db/models/tasks')
-const {isLoggedIn, isAdmin} = require('./authentication-middleware')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -12,7 +11,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/', isAdmin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const newTask = await Task.create(req.body)
     res.status(201).json(newTask)
@@ -32,7 +31,19 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', isAdmin, async (req, res, next) => {
+router.get('/latest', async (req, res, next) => {
+  try {
+    const task = await Task.findOne({
+      where: {},
+      order: [['createdAt', 'DESC']]
+    })
+    res.json(task)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:id', async (req, res, next) => {
   try {
     const id = req.params.id
     await Task.destroy({where: {id}})
@@ -42,7 +53,7 @@ router.delete('/:id', isAdmin, async (req, res, next) => {
   }
 })
 
-router.put('/:id', isAdmin, async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const id = req.params.id
     const task = await Task.findById(id)

@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import {postTasks} from '../store/tasksReducer'
+import {modifyTask} from '../store/tasksReducer'
 import {connect} from 'react-redux'
-import {getTaskByID} from '../store/tasksReducer'
+import {findLastTask} from '../store/tasksReducer'
+import {Link} from 'react-router-dom'
 
 class inputData extends React.Component {
   constructor(props) {
@@ -12,6 +13,8 @@ class inputData extends React.Component {
       description: '',
       category: ''
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event) {
@@ -22,12 +25,13 @@ class inputData extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault()
-    const startTime = await getTaskByID
-    this.props.editTask({
+    const currentTask = await this.props.findLastTask()
+    // console.log(currentTask)
+    this.props.modifyTask(currentTask.id, {
       name: this.state.name,
       description: this.state.description,
       category: this.state.category,
-      timeElapsed: startTime.createdAt - Date.now()
+      timeElapsed: currentTask.createdAt - Date.now()
     })
   }
 
@@ -63,7 +67,7 @@ class inputData extends React.Component {
               value={this.state.category}
             />
           </label>
-          <button onClick={this.handleInput}> Save </button>
+          <button type="submit"> Save </button>
         </form>
       </div>
     )
@@ -72,7 +76,8 @@ class inputData extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTaskByID: taskId => dispatch(getTaskByID(taskId))
+    findLastTask: () => dispatch(findLastTask()),
+    modifyTask: (id, modifiedTask) => dispatch(modifyTask(id, modifiedTask))
   }
 }
 

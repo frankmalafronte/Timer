@@ -37,7 +37,7 @@ class Stopwatch extends Component {
   render() {
     return (
       <div>
-        <p>0ms</p>
+        <p>{this.state.runningTime}ms </p>
         {this.state.status ? (
           <TimerOn runningtime={this.state.runningTime} />
         ) : (
