@@ -29,6 +29,7 @@ export const getSingleTask = function(TASKS) {
 }
 
 export const addTasks = function(TASKS) {
+  // console.log('action creator called',TASKS)
   return {
     type: ADD_TASKS,
     TASKS
@@ -64,7 +65,7 @@ export const loadTasks = () => {
   }
 }
 
-export const getTaskByID = () => {
+export const getTaskByID = id => {
   return async dispatch => {
     const res = await axios.get(`/api/tasks/${id}`)
     dispatch(getSingleTask(res.data))
@@ -118,14 +119,14 @@ export function tasksReducer(state = initialState, action) {
     case ADD_TASKS:
       return {
         ...state,
-        allTasks: [...state.allTasks, action.Tasks]
+        allTasks: [...state.allTasks, action.TASKS]
       }
     case EDIT_TASK:
       return {
         ...state,
         allTasks: [
           ...state.allTasks.filter(task => task.id !== action.taskId),
-          action.Tasks
+          action.TASKS
         ]
       }
     case REMOVE_TASKS:

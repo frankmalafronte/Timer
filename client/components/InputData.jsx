@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {modifyTask} from '../store/tasksReducer'
 import {connect} from 'react-redux'
-import {findLastTask} from '../store/tasksReducer'
+import {loadTasks, postTasks, removeTasks} from '../store/tasksReducer'
 import {Link} from 'react-router-dom'
 
 class inputData extends React.Component {
@@ -15,6 +15,11 @@ class inputData extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDiscard = this.handleDiscard.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.loadTasks()
   }
 
   handleChange(event) {
@@ -23,15 +28,20 @@ class inputData extends React.Component {
     })
   }
 
-  async handleSubmit(event) {
+  handleDiscard(event) {
     event.preventDefault()
-    const currentTask = await this.props.findLastTask()
-    // console.log(currentTask)
+    let currentTask = this.props.allTasks[this.props.allTasks.length - 1]
+    this.props.removeTasks(currentTask.id)
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.props.loadTasks()
+    let currentTask = this.props.allTasks[this.props.allTasks.length - 1]
     this.props.modifyTask(currentTask.id, {
       name: this.state.name,
       description: this.state.description,
-      category: this.state.category,
-      timeElapsed: currentTask.createdAt - Date.now()
+      category: this.state.category
     })
   }
 
@@ -69,16 +79,27 @@ class inputData extends React.Component {
           </label>
           <button type="submit"> Save </button>
         </form>
+        <div>
+          <button onClick={this.handleDiscard}> Discard </button>
+        </div>
       </div>
     )
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    findLastTask: () => dispatch(findLastTask()),
-    modifyTask: (id, modifiedTask) => dispatch(modifyTask(id, modifiedTask))
+    allTasks: state.tasksReducer.allTasks
   }
 }
 
-export default connect(null, mapDispatchToProps)(inputData)
+const mapDispatchToProps = dispatch => {
+  return {
+    loadTasks: () => dispatch(loadTasks()),
+    modifyTask: (id, modifiedTask) => dispatch(modifyTask(id, modifiedTask)),
+    postTasks: tasks => dispatch(postTasks(tasks)),
+    removeTasks: id => dispatch(removeTasks(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(inputData)

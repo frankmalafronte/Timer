@@ -33,7 +33,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/latest', async (req, res, next) => {
   try {
-    const task = await Task.findOne({
+    const tasks = await Task.findOne({
+      limit: 1,
       where: {},
       order: [['createdAt', 'DESC']]
     })
@@ -57,7 +58,8 @@ router.put('/:id', async (req, res, next) => {
   try {
     const id = req.params.id
     const task = await Task.findById(id)
-    res.json(task)
+    const modifiedTask = await task.update(req.body)
+    res.json(modifiedTask)
   } catch (err) {
     next(err)
   }

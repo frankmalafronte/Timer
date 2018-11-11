@@ -14,10 +14,13 @@ const Task = db.define('tasks', {
   category: {
     type: Sequelize.STRING
   }
+  // timeStamp: {
+  //   type: Sequelize.BIGINT
+  // }
 })
 
-Task.hook('beforeValidate', tasks => {
-  tasks.name = tasks.name.charAt(0).toUpperCase() + tasks.name.slice(1)
-})
+// Task.hook('beforeValidate', tasks => {
+//   tasks.name = tasks.name.charAt(0).toUpperCase() + tasks.name.slice(1)
+// })
 
 module.exports = Task

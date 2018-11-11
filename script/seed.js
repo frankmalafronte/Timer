@@ -12,7 +12,25 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
+  const tasks = await Promise.all([
+    Task.create({
+      timeElapsed: 15476443,
+      description: 'updated components',
+      name: 'timer',
+      category: 'coding',
+      userId: 1
+    }),
+    Task.create({
+      timeElapsed: 15476446,
+      description: 'updated routes',
+      name: 'timer',
+      category: 'coding',
+      userId: 1
+    })
+  ])
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${tasks.length} tasks`)
   console.log(`seeded successfully`)
 }
 
