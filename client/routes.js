@@ -4,7 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
-
+import {Stopwatch} from './components'
 /**
  * COMPONENT
  */
@@ -19,6 +19,8 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={Stopwatch} />
+        <Route exact path="tasks" component={tasksHistory} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
