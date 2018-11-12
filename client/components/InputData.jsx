@@ -39,9 +39,8 @@ class inputData extends React.Component {
     this.props.loadTasks()
     let currentTask = this.props.allTasks[this.props.allTasks.length - 1]
     this.props.modifyTask(currentTask.id, {
-      name: this.state.name,
-      description: this.state.description,
-      category: this.state.category
+      category: this.state.category,
+      description: this.state.description
     })
   }
 
@@ -51,13 +50,18 @@ class inputData extends React.Component {
         <h3> Save this Task </h3>
         <form onSubmit={this.handleSubmit}>
           <label>
-            Name:
-            <input
-              type="text"
-              name="name"
+            Category:
+            <select
+              name="category"
               onChange={this.handleChange}
-              value={this.state.name}
-            />
+              value={this.state.category}
+              required
+            >
+              <option value="">--</option>
+              <option value="Coding">Coding</option>
+              <option value="Sleeping">Sleeping</option>
+              <option value="Procrastinating">Procrastinating</option>
+            </select>
           </label>
           <label>
             Description:
@@ -68,20 +72,12 @@ class inputData extends React.Component {
               value={this.state.description}
             />
           </label>
-          <label>
-            Category:
-            <input
-              type="text"
-              name="category"
-              onChange={this.handleChange}
-              value={this.state.category}
-            />
-          </label>
+
           <button type="submit"> Save </button>
         </form>
-        <div>
+        {/* <div>
           <button onClick={this.handleDiscard}> Discard </button>
-        </div>
+        </div> */}
       </div>
     )
   }
