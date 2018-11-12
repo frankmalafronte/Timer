@@ -75,9 +75,9 @@ class inputData extends React.Component {
 
           <button type="submit"> Save </button>
         </form>
-        {/* <div>
+        <div>
           <button onClick={this.handleDiscard}> Discard </button>
-        </div> */}
+        </div>
       </div>
     )
   }
