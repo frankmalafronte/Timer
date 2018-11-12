@@ -39,6 +39,10 @@ class PieChart extends Component {
         chartType="PieChart"
         // loader={<div>Loading Chart</div>}
         data={this.state.chartData}
+        options={{
+          title: 'My Stackathon Log',
+          is3D: true
+        }}
       />
     )
   }
