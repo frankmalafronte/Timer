@@ -8,9 +8,6 @@ const Task = db.define('tasks', {
   description: {
     type: Sequelize.STRING
   },
-  name: {
-    type: Sequelize.STRING
-  },
   category: {
     type: Sequelize.STRING
   }

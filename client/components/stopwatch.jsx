@@ -2,7 +2,12 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import TimerOn from './TimerOn'
 import InputData from './InputData'
-import {postTasks, loadTasks, modifyTask} from '../store/tasksReducer'
+import {
+  postTasks,
+  loadTasks,
+  modifyTask,
+  removeTasks
+} from '../store/tasksReducer'
 
 class Stopwatch extends Component {
   constructor(props) {
@@ -10,8 +15,7 @@ class Stopwatch extends Component {
 
     this.state = {
       status: false,
-      runningTime: 0,
-      currentTask: null
+      runningTime: 0
     }
   }
 
@@ -45,7 +49,12 @@ class Stopwatch extends Component {
     })
   }
   handleReset = () => {
-    this.setState({runningTime: 0, status: false})
+    if (this.state.runningTime > 0) {
+      let currentTask = this.props.allTasks[this.props.allTasks.length - 1]
+      this.props.removeTasks(currentTask.id)
+    }
+
+    location.reload()
   }
 
   // componentWillUnmount() {
@@ -85,7 +94,8 @@ const mapDispatchToProps = dispatch => {
   return {
     postTasks: tasks => dispatch(postTasks(tasks)),
     loadTasks: () => dispatch(loadTasks()),
-    modifyTask: (id, modifiedTask) => dispatch(modifyTask(id, modifiedTask))
+    modifyTask: (id, modifiedTask) => dispatch(modifyTask(id, modifiedTask)),
+    removeTasks: id => dispatch(removeTasks(id))
   }
 }
 

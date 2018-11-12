@@ -14,18 +14,21 @@ async function seed() {
 
   const tasks = await Promise.all([
     Task.create({
-      timeElapsed: 15476443,
+      timeElapsed: 1440000000,
       description: 'updated components',
-      name: 'timer',
-      category: 'coding',
+      category: 'Coding',
       userId: 1
     }),
     Task.create({
-      timeElapsed: 15476446,
+      timeElapsed: 432000000,
       description: 'updated routes',
-      name: 'timer',
-      category: 'coding',
+      category: 'Sleeping',
       userId: 1
+    }),
+    Task.create({
+      timeElapsed: 720000000,
+      description: 'only a little!',
+      category: 'Procrastinating'
     })
   ])
 
