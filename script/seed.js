@@ -26,7 +26,7 @@ async function seed() {
       userId: 1
     }),
     Task.create({
-      timeElapsed: 720000000,
+      timeElapsed: 72000000,
       description: 'only a little!',
       category: 'Procrastinating'
     })
