@@ -29,7 +29,7 @@ class Stopwatch extends Component {
         this.props.loadTasks()
         let currentTask = this.props.allTasks[this.props.allTasks.length - 1]
         this.props.modifyTask(currentTask.id, {
-          timeElapsed: state.runningTime
+          timeElapsed: state.runningTime + 1
         })
         clearInterval(this.timer)
       } else {
