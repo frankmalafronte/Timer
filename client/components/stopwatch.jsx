@@ -10,8 +10,7 @@ class Stopwatch extends Component {
 
     this.state = {
       status: false,
-      runningTime: 0,
-      currentTask: null
+      runningTime: 0
     }
   }
 
