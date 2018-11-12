@@ -57,9 +57,9 @@ class Stopwatch extends Component {
     location.reload()
   }
 
-  // componentWillUnmount() {
-  //     clearInterval(this.timer);
-  //   }
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
 
   render() {
     return (

@@ -10,7 +10,6 @@ class PieChart extends Component {
       chartData: null
     }
   }
-
   setDataToState = () => {
     let output = {
       Coding: 0,
@@ -27,8 +26,8 @@ class PieChart extends Component {
     this.setState({chartData: realOutput})
   }
 
-  async componentDidMount() {
-    await this.props.loadTasks()
+  componentDidMount() {
+    this.props.loadTasks()
     this.setDataToState()
   }
 
